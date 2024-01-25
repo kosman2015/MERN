@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
-import Post from "../models/postModel.js";
 
 // @desc Auth user/set token
 // route POST /api/users/auth
@@ -103,32 +102,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
-// @desc create a new post
-// route POST /api/new
-const createNewPost = asyncHandler(async (req, res) => {
-  const { title, body } = req.body;
-  const author = {
-    id: req.user._id,
-    name: req.user.name,
-  };
-  const post = await Post.create({
-    title,
-    body,
-    author,
-  });
-
-  if (post) {
-    res.status(201).json({
-      _id: post._id,
-      title: post.title,
-      author: post.author.name,
-      feedback: post.feedback,
-    });
-  } else {
-    res.status(400);
-    throw new Error("Post was not created");
-  }
-});
 
 export {
   authUser,
@@ -136,5 +109,4 @@ export {
   logoutUser,
   getUserProfile,
   updateUserProfile,
-  createNewPost,
 };
