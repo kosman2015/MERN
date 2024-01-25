@@ -3,15 +3,27 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema(
   {
     title: String,
-    author: String,
+    author: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      name: String,
+    },
     body: String,
     date: {
       type: Date,
       default: Date.now,
     },
     feedback: {
-      likes: Number,
-      dislikes: Number,
+      likes: {
+        type: Number,
+        default: 0,
+      },
+      dislikes: {
+        type: Number,
+        default: 0,
+      },
     },
   },
 
