@@ -126,7 +126,7 @@ const createNewPost = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("something went wrong");
+    throw new Error("Post was not created");
   }
 });
 
