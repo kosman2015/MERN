@@ -32,12 +32,13 @@ const createNewPost = asyncHandler(async (req, res) => {
 // route GET /api/posts/id
 // @access Public
 const getPost = asyncHandler(async (req, res) => {
-  const user = {
-    _id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
-  };
-  res.status(200).json(user);
+  const post = await Post.findById(req.params);
+  if (post) {
+    res.status(200).json(post);
+  } else {
+    res.status(404);
+    throw new Error("Post does not exist");
+  }
 });
 
 export { createNewPost, getPost };
