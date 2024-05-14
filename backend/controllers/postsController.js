@@ -41,4 +41,9 @@ const getPost = asyncHandler(async (req, res) => {
   }
 });
 
-export { createNewPost, getPost };
+const getAllPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find({});
+  res.status(200).json(posts);
+});
+
+export { createNewPost, getPost, getAllPosts };
