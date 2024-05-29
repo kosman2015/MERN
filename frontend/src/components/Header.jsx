@@ -31,6 +31,9 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>MERN App</Navbar.Brand>
           </LinkContainer>
+          <LinkContainer to="/posts">
+            <Navbar.Brand>Posts</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">

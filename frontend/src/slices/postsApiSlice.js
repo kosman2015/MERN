@@ -10,7 +10,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    getPosts: builder.mutation({
+    getPosts: builder.query({
       query: (data) => ({
         url: `${POSTS_URL}`,
         method: "GET",
@@ -20,4 +20,4 @@ export const postsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateMutation, useGetPostsMutation } = postsApiSlice;
+export const { useCreateMutation, useGetPostsQuery } = postsApiSlice;
