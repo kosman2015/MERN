@@ -1,4 +1,5 @@
 import { apiSlice } from "./apiSlice";
+
 const POSTS_URL = "/api/posts";
 
 export const postsApiSlice = apiSlice.injectEndpoints({
@@ -11,13 +12,19 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getPosts: builder.query({
-      query: (data) => ({
+      query: () => ({
         url: `${POSTS_URL}`,
         method: "GET",
-        body: data,
+      }),
+    }),
+    getPost: builder.query({
+      query: (id) => ({
+        url: `${POSTS_URL}/${id}`,
+        method: "GET",
       }),
     }),
   }),
 });
 
-export const { useCreateMutation, useGetPostsQuery } = postsApiSlice;
+export const { useCreateMutation, useGetPostsQuery, useGetPostQuery } =
+  postsApiSlice;

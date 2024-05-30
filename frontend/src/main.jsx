@@ -18,6 +18,7 @@ import ProfileScreen from "./screens/ProfileScreen.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import PostsScreen from "./screens/PostsScreen.jsx";
 import CreatePostScreen from "./screens/CreatePostScreen.jsx";
+import PostScreen from "./screens/PostScreen.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/posts" element={<PostsScreen />} />
       <Route path="/posts/new" element={<CreatePostScreen />} />
+      <Route path="/posts/:id" element={<PostScreen />} />
     </Route>
   )
 );

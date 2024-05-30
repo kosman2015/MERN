@@ -1,6 +1,5 @@
 import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useGetPostsQuery } from "../slices/postsApiSlice";
 
 function PostsScreen() {
@@ -10,6 +9,8 @@ function PostsScreen() {
   useEffect(() => {
     if (!isLoading && !isError) {
       setPosts(data);
+      console.log(posts);
+      console.log(data);
     }
   }, [data, isLoading, isError]);
 
