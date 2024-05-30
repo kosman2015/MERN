@@ -16,7 +16,7 @@ const createNewPost = asyncHandler(async (req, res) => {
     author,
   });
 
-  if (post) {
+  if (post && post.title.length > 0 && post.body.length > 0) {
     res.status(201).json({
       _id: post._id,
       title: post.title,
