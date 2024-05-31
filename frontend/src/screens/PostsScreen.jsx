@@ -2,6 +2,7 @@ import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
 import { useGetPostsQuery } from "../slices/postsApiSlice";
 import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 
 function PostsScreen() {
   const [posts, setPosts] = useState(null);
@@ -19,7 +20,7 @@ function PostsScreen() {
   }, [data, isLoading, isError]);
 
   return (
-    <div>
+    <div className="center-card">
       <h1>PostsScreen</h1>
       {isLoading ? (
         <Loader />
@@ -28,15 +29,19 @@ function PostsScreen() {
       ) : (
         posts &&
         posts.map((post) => (
-          <div
+          <Card
             className="post-hover"
             key={post._id}
             onClick={() => handleClick(post._id)}
+            bg="dark"
+            border="primary"
           >
-            <h2>{post.title}</h2>
-            <h3>By: {post.author.name}</h3>
-            <p>{post.body}</p>
-          </div>
+            <Card.Body>
+              <Card.Title>{post.title}</Card.Title>
+              <Card.Subtitle>By: {post.author.name}</Card.Subtitle>
+              <Card.Text>{post.body}</Card.Text>
+            </Card.Body>
+          </Card>
         ))
       )}
     </div>
