@@ -16,7 +16,7 @@ function CreatePostScreen() {
         body: e.target.body.value,
       });
 
-      navigate("/posts");
+      navigate(`/posts/${post.data._id}`);
       toast.success("Post created successfully!");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
