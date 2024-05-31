@@ -21,7 +21,7 @@ function PostsScreen() {
 
   return (
     <div className="center-card">
-      <h1>PostsScreen</h1>
+      <h1>All Posts</h1>
       {isLoading ? (
         <Loader />
       ) : isError ? (

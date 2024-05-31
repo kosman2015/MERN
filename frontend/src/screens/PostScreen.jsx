@@ -17,7 +17,6 @@ function PostScreen() {
 
   return (
     <div>
-      <h1>PostScreen</h1>
       {isLoading ? (
         <Loader />
       ) : isError ? (
