@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 function PostsScreen() {
-  const [posts, setPosts] = useState([]);
-  const { data, isLoading, isError } = useGetPostsQuery({
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading, isError } = useGetPostsQuery();
   const navigate = useNavigate();
 
   const handleClick = (id) => {
@@ -17,9 +14,9 @@ function PostsScreen() {
 
   useEffect(() => {
     if (!isLoading && !isError) {
-      setPosts(data);
+      data;
     }
-  }, [posts, isLoading, isError]);
+  }, [data, isLoading, isError]);
 
   return (
     <div className="center-card">
@@ -28,11 +25,11 @@ function PostsScreen() {
         <Loader />
       ) : isError ? (
         <div>Error: {isError.message}</div>
-      ) : posts.length === 0 ? (
+      ) : data.length === 0 ? (
         <h1>No Posts</h1>
       ) : (
-        posts &&
-        posts.map((post) => (
+        data &&
+        data.map((post) => (
           <Card
             className="post-hover"
             key={post._id}

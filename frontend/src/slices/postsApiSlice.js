@@ -16,6 +16,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         url: `${POSTS_URL}`,
         method: "GET",
       }),
+      providesTags: ["Post"],
     }),
     getPost: builder.query({
       query: (id) => ({
