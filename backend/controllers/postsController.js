@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Post from "../models/postModel.js";
+import User from "../models/userModel.js";
+import Comment from "../models/commentModel.js";
 
 // @desc create a new post
 // route POST /api/new
@@ -33,8 +35,12 @@ const createNewPost = asyncHandler(async (req, res) => {
 // @access Public
 const getPost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params);
+  const comments = await Comment.find({ post: post._id });
   if (post) {
-    res.status(200).json(post);
+    res.status(200).json({
+      post,
+      comments,
+    });
   } else {
     res.status(404);
     throw new Error("Post does not exist");
@@ -46,4 +52,34 @@ const getAllPosts = asyncHandler(async (req, res) => {
   res.status(200).json(posts);
 });
 
-export { createNewPost, getPost, getAllPosts };
+const addComment = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params);
+  const user = await User.findById(req.user._id);
+  const { comment } = req.body;
+  const author = {
+    id: req.user._id,
+    name: req.user.name,
+  };
+  if (user) {
+    if (post) {
+      const newComment = await Comment.create({
+        body: comment,
+        author,
+        post,
+      });
+
+      res.status(201).json({
+        body: newComment.body,
+        author: newComment.author.name,
+      });
+    } else {
+      res.status(404);
+      throw new Error("Post does not exist");
+    }
+  } else {
+    res.status(404);
+    throw new Error("Must be logged in to comment");
+  }
+});
+
+export { createNewPost, getPost, getAllPosts, addComment };

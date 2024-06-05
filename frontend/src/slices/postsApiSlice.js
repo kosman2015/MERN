@@ -24,9 +24,22 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         url: `${POSTS_URL}/${id}`,
         method: "GET",
       }),
+      providesTags: ["Post"],
+    }),
+    addComment: builder.mutation({
+      query: ({ id, comment }) => ({
+        url: `${POSTS_URL}/${id}`,
+        method: "POST",
+        body: comment,
+      }),
+      invalidatesTags: ["Post"],
     }),
   }),
 });
 
-export const { useCreateMutation, useGetPostsQuery, useGetPostQuery } =
-  postsApiSlice;
+export const {
+  useCreateMutation,
+  useGetPostsQuery,
+  useGetPostQuery,
+  useAddCommentMutation,
+} = postsApiSlice;
